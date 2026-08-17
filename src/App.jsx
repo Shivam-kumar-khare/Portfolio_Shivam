@@ -80,16 +80,13 @@ function IconLink({ href, label, children }) {
 }
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(() => {
+    const storedTheme = localStorage.getItem('portfolio-theme')
+    return storedTheme ? storedTheme === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+  })
   const [menuOpen, setMenuOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const [formState, setFormState] = useState('idle')
-
-  useEffect(() => {
-    const stored = localStorage.getItem('portfolio-theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    setDarkMode(stored ? stored === 'dark' : prefersDark)
-  }, [])
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
