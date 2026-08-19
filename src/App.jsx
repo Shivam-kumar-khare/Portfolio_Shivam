@@ -38,7 +38,7 @@ function App() {
     <SiteHeader darkMode={darkMode} navItems={navItems} onToggleTheme={() => setDarkMode((value) => !value)} />
 
     <main id="main">
-      <section id="top" className="relative isolate pt-32 sm:pt-40">
+      <section id="top" className="relative isolate scroll-mt-20 pt-32 sm:pt-40">
         <div className="pointer-events-none absolute left-[52%] top-8 -z-10 size-105 rounded-full bg-orange-200/45 blur-3xl dark:bg-orange-500/10" />
         <div className="section-shell grid min-h-[650px] items-center gap-12 pb-18 lg:grid-cols-[1.12fr_.88fr] lg:pb-24">
           <FadeIn>
@@ -64,7 +64,7 @@ function App() {
         </div>
       </section>
       {/*========================================About==================================== */}
-      <section id="about" className="border-y border-stone-200 bg-white/50 py-8 dark:border-white/10 dark:bg-white/[0.025]">
+      <section id="about" className="scroll-mt-20 border-y border-stone-200 bg-white/50 py-8 dark:border-white/10 dark:bg-white/[0.025]">
         <div className="section-shell grid gap-6 sm:grid-cols-3 sm:gap-0">
           <div className="flex gap-4 sm:border-r sm:border-stone-200 sm:pr-6 dark:sm:border-white/10">
             <span className="text-3xl font-display text-orange-600">8.64</span>
@@ -89,7 +89,7 @@ function App() {
         </div>
       </section>
       {/*========================================Skills==========================================================*/}
-      <section id="skills" className="section-shell py-24 sm:py-32">
+      <section id="skills" className="scroll-mt-20 section-shell py-24 sm:py-32">
         <FadeIn>
           <SectionTitle label="Capabilities" title="A practical, evolving toolkit." copy="I enjoy working across the stack — from structuring clean data models and APIs to crafting interfaces people genuinely enjoy using." />
         </FadeIn>
@@ -111,7 +111,7 @@ function App() {
         </div>
       </section>
       {/*=======================================Projects=======================================*/}
-      <section id="projects" className="bg-stone-950 py-24 text-white sm:py-32">
+      <section id="projects" className="scroll-mt-20 bg-stone-950 py-24 text-white sm:py-32">
         <div className="section-shell">
           <FadeIn>
             <p className="eyebrow text-orange-400">Selected work
@@ -131,18 +131,18 @@ function App() {
         </div>
       </section>
       {/*===========================================Journey===============================================*/}
-      <section id="journey" className="section-shell py-24 sm:py-32">
+      <section id="journey" className="scroll-mt-20 section-shell py-24 sm:py-32">
         <FadeIn>
           <SectionTitle label="Journey" title="Learning in public, building with intention." copy="A concise snapshot of the experiences and credentials shaping how I approach software engineering." />
         </FadeIn>
         <div className="relative mt-14 max-w-3xl before:absolute before:bottom-5 before:left-[19px] before:top-5 before:w-px before:bg-stone-200 dark:before:bg-white/15">
           {
-            timeline.map((entry, index) => <TimelineItem key={entry.title} entry={entry} delay={index * 0.08} />)
+            timeline.map((entry, index) => <TimelineItem key={entry.title+entry.type+index} entry={entry} delay={index * 0.08} />)
           }
         </div>
       </section>
       {/*======================================================Contacts======================================*/}
-      <section id="contact" className="border-y border-stone-200 bg-orange-100/55 py-24 dark:border-white/10 dark:bg-orange-500/[0.06] sm:py-32">
+      <section id="contact" className="scroll-mt-20 border-y border-stone-200 bg-orange-100/55 py-24 dark:border-white/10 dark:bg-orange-500/[0.06] sm:py-32">
         <div className="section-shell grid gap-14 lg:grid-cols-[.82fr_1.18fr]">
           <FadeIn>
             <p className="eyebrow">Get in touch</p>
