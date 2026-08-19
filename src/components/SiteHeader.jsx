@@ -6,24 +6,25 @@ export function SiteHeader({ darkMode, navItems, onToggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
   const handleNavClick = (e, href) => {
-    setMenuOpen(false)
     if (href.startsWith('#')) {
       e.preventDefault()
+      setMenuOpen(false)
       const targetId = href.substring(1)
-      const element = document.getElementById(targetId)
-      if (element) {
-        const headerOffset = 72
-        const elementPosition = element.getBoundingClientRect().top
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        })
-        if (window.history.pushState) {
-          window.history.pushState(null, '', href)
+      const scrollToSection = () => {
+        const element = document.getElementById(targetId)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          if (window.history.pushState) {
+            window.history.pushState(null, '', href)
+          }
         }
       }
+
+      // Schedule scroll after React re-renders and menu collapse begins
+      requestAnimationFrame(() => {
+        setTimeout(scrollToSection, 50)
+      })
     }
   }
 
