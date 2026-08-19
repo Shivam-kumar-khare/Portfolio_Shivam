@@ -1,83 +1,12 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
-  ArrowDownRight, ArrowRight, Award, BriefcaseBusiness, Check, CheckCircle2,
-  ChevronRight, Clipboard, Code2, Copy, Download, ExternalLink,
-  GraduationCap, Mail, Menu, Moon, Send, Sun, X,
+  ArrowDownRight, ArrowRight, Award, Check, CheckCircle2, ChevronRight,
+  Code2, Copy, Download, ExternalLink, Mail, Menu, Moon, Send, Sun, X,
 } from 'lucide-react'
-
-const EMAIL = 'shivamkhare6762@gmail.com'
-const LINKS = {
-  github: 'https://github.com/Shivam-kumar-khare/',
-  linkedin: 'https://linkedin.com/in/shivamkumarkhare/',
-}
-
-const navItems = [
-  ['About', '#about'],
-  ['Skills', '#skills'],
-  ['Projects', '#projects'],
-  ['Journey', '#journey'],
-]
-
-const skills = [
-  { icon: Code2, title: 'Programming languages', items: ['C++', 'Java', 'JavaScript', 'C'] },
-  { icon: Clipboard, title: 'Web & frameworks', items: ['React.js', 'Node.js', 'Express.js', 'Redux Toolkit', 'Tailwind CSS', 'REST APIs'] },
-  { icon: BriefcaseBusiness, title: 'Databases & tools', items: ['MongoDB', 'MySQL', 'Git', 'GitHub', 'Postman'] },
-]
-
-const projects = [
-  {
-    number: '01',
-    kind: 'Backend focused',
-    title: 'Video Uploading Social Media Platform',
-    description: 'A production-minded backend for a video-first social experience, designed around secure users, performant media workflows, and useful creator insights.',
-    points: ['Designed RESTful APIs for video, user, playlist, and subscription workflows.', 'Implemented secure JWT authentication, password hashing, and protected routes.', 'Built a media pipeline with Multer and Cloudinary, including channel analytics.'],
-    stack: ['Node.js', 'Express.js', 'MongoDB', 'Cloudinary', 'JWT', 'Bcrypt', 'Multer'],
-    accent: 'bg-[#e76432]',
-    demo: '#',
-  },
-  {
-    number: '02',
-    kind: 'Frontend focused',
-    title: 'Modern Blogging Web Platform',
-    description: 'A clean publishing platform with a focused writing experience and predictable, centralized application state.',
-    points: ['Built role-based authorization for secure, permission-aware user journeys.', 'Enabled rich-text post creation, editing, and lifecycle management.', 'Centralized client state with Redux Toolkit for a consistent interface.'],
-    stack: ['React.js', 'Tailwind CSS', 'Redux Toolkit', 'Appwrite', 'Vite'],
-    accent: 'bg-[#4b7bec]',
-    demo: '#',
-  },
-]
-
-const timeline = [
-  { type: 'Experience', icon: BriefcaseBusiness, title: 'Big Data & Business Management Intern', org: 'IBM SkillsBuild & AICTE', period: 'Jun 2026 – Jul 2026', detail: 'Built practical foundations in data-driven business analysis and large-scale data concepts through guided, industry-aligned learning.' },
-  { type: 'Certification', icon: Award, title: 'Samsung AI Certification', org: 'Samsung Innovation Campus', period: 'Dec 2025 – Mar 2026', detail: 'Completed structured training in artificial intelligence concepts and their practical applications.' },
-  { type: 'Certification', icon: Award, title: 'Introduction to Generative AI', org: 'Google Cloud / Coursera', period: 'Credential earned', detail: 'Explored core generative AI concepts, use cases, and responsible implementation practices.' },
-]
-
-function GithubLogo({ size = 18 }) {
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.91-2.78.62-3.37-1.2-3.37-1.2-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.56 2.35 1.11 2.92.85.09-.67.35-1.12.64-1.38-2.22-.26-4.56-1.14-4.56-5.08 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.87c.85 0 1.7.12 2.5.35 1.91-1.33 2.74-1.05 2.74-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.95-2.35 4.81-4.58 5.07.36.32.68.93.68 1.88 0 1.36-.01 2.45-.01 2.79 0 .27.18.59.69.49A10.25 10.25 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z" /></svg>
-}
-
-function LinkedinLogo({ size = 18 }) {
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.37 3.5a2.12 2.12 0 1 0 0 4.24 2.12 2.12 0 0 0 0-4.24ZM3.5 9.39h3.74V21H3.5V9.39ZM9.59 9.39h3.58v1.59h.05c.5-.95 1.72-1.95 3.54-1.95 3.79 0 4.49 2.49 4.49 5.73V21h-3.74v-5.53c0-1.32-.02-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.93V21H9.59V9.39Z" /></svg>
-}
-
-function FadeIn({ children, className = '', delay = 0 }) {
-  const reduceMotion = useReducedMotion()
-  return <motion.div className={className} initial={reduceMotion ? false : { opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-70px' }} transition={{ duration: 0.55, delay, ease: [0.16, 1, 0.3, 1] }}>{children}</motion.div>
-}
-
-function SectionTitle({ label, title, copy, align = 'left' }) {
-  return <div className={align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-2xl'}>
-    <p className="eyebrow">{label}</p>
-    <h2 className="mt-3 font-display text-4xl leading-[1.05] tracking-[-0.04em] sm:text-5xl">{title}</h2>
-    {copy && <p className="mt-5 text-base leading-7 text-stone-600 dark:text-stone-400">{copy}</p>}
-  </div>
-}
-
-function IconLink({ href, label, children }) {
-  return <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noreferrer' : undefined} aria-label={label} className="inline-flex size-11 items-center justify-center rounded-full border border-stone-300 text-stone-700 transition hover:-translate-y-0.5 hover:border-stone-900 hover:bg-stone-900 hover:text-white dark:border-white/20 dark:text-stone-200 dark:hover:border-white dark:hover:bg-white dark:hover:text-stone-900">{children}</a>
-}
+import { EMAIL, LINKS, navItems, projects, skills, timeline } from './data/dataItems.js'
+import { GithubLogo, LinkedinLogo } from './components/BrandIcons.jsx'
+import { FadeIn, IconLink, SectionTitle } from './components/ui.jsx'
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -94,7 +23,12 @@ function App() {
   }, [darkMode])
 
   const copyEmail = async () => {
-    try { await navigator.clipboard.writeText(EMAIL) } catch { /* Mailto remains available if clipboard is unavailable. */ }
+    try {
+      await navigator.clipboard.writeText(EMAIL)
+    } catch {
+      // Mailto remains available if clipboard access is unavailable.
+    }
+
     setCopied(true)
     window.setTimeout(() => setCopied(false), 1800)
   }
@@ -102,8 +36,12 @@ function App() {
   const submitForm = (event) => {
     event.preventDefault()
     const form = event.currentTarget
+
     setFormState('sending')
-    window.setTimeout(() => { setFormState('sent'); form.reset() }, 900)
+    window.setTimeout(() => {
+      setFormState('sent')
+      form.reset()
+    }, 900)
   }
 
   return <div className="overflow-x-hidden">
@@ -147,8 +85,6 @@ function App() {
                 <div className="flex items-end justify-between border-t border-white/15 pt-4"><p className="max-w-40 text-sm leading-5 text-stone-300">Full-stack developer. Curious problem-solver.</p><span className="font-mono text-xs text-stone-400">01—26</span></div>
               </div>
             </div>
-           {/* <div className="surface absolute -bottom-5 -left-4 flex items-center gap-3 rounded-2xl px-4 py-3 shadow-lg dark:shadow-black/20 sm:-left-10"><span className="flex size-8 items-center justify-center rounded-full bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300"><GraduationCap size={16} /></span><span><span className="block text-sm font-semibold">8.64 CGPA</span><span className="block text-xs text-stone-500">GGSIPU · CSE</span></span>
-             </div> */}
           </FadeIn>
         </div>
       </section>
@@ -159,7 +95,7 @@ function App() {
 
       <section id="skills" className="section-shell py-24 sm:py-32"><FadeIn><SectionTitle label="Capabilities" title="A practical, evolving toolkit." copy="I enjoy working across the stack — from structuring clean data models and APIs to crafting interfaces people genuinely enjoy using." /></FadeIn><div className="mt-12 grid gap-4 lg:grid-cols-3">{skills.map(({ icon: Icon, title, items }, index) => <FadeIn key={title} delay={index * 0.07}><article className="surface h-full rounded-2xl p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-stone-200/70 dark:hover:shadow-black/20"><div className="flex items-center gap-3"><span className="flex size-10 items-center justify-center rounded-xl bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-300"><Icon size={20} /></span><h3 className="font-semibold">{title}</h3></div><div className="mt-7 flex flex-wrap gap-2">{items.map((item) => <span key={item} className="rounded-md bg-stone-100 px-2.5 py-1.5 font-mono text-[11px] text-stone-700 dark:bg-white/[0.07] dark:text-stone-300">{item}</span>)}</div></article></FadeIn>)}</div></section>
 
-      <section id="projects" className="bg-stone-950 py-24 text-white sm:py-32"><div className="section-shell"><FadeIn><p className="eyebrow text-orange-400">Selected work</p><div className="mt-3 flex flex-col justify-between gap-5 md:flex-row md:items-end"><h2 className="max-w-xl font-display text-4xl leading-[1.05] tracking-[-0.04em] sm:text-5xl">Built around solid engineering, not just good-looking screens.</h2><a href={LINKS.github} target="_blank" rel="noreferrer" className="group shrink-0 font-mono text-xs uppercase tracking-[0.13em] text-stone-400 transition hover:text-white">More on GitHub <ArrowRight className="ml-1 inline size-3.5 transition group-hover:translate-x-1" /></a></div></FadeIn><div className="mt-14 grid gap-5 lg:grid-cols-2">{projects.map((project, index) => <FadeIn key={project.title} delay={index * 0.1}><article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/25 sm:p-8"><div className={`absolute right-0 top-0 h-1 w-28 ${project.accent}`} /><div className="flex items-center justify-between font-mono text-xs text-stone-500"><span>{project.number}</span><span>{project.kind}</span></div><h3 className="mt-10 max-w-md font-display text-3xl leading-[1.08] tracking-[-0.035em]">{project.title}</h3><p className="mt-4 max-w-lg text-sm leading-6 text-stone-400">{project.description}</p><ul className="mt-7 space-y-3">{project.points.map((point) => <li key={point} className="flex gap-3 text-sm leading-5 text-stone-300"><Check className="mt-0.5 size-4 shrink-0 text-orange-400" />{point}</li>)}</ul><div className="mt-7 flex flex-wrap gap-2">{project.stack.map((tech) => <span key={tech} className="rounded-md border border-white/10 px-2 py-1 font-mono text-[10px] text-stone-400">{tech}</span>)}</div><div className="mt-8 flex gap-5 border-t border-white/10 pt-5"><a href={LINKS.github} target="_blank" rel="noreferrer" className="group/link text-sm font-medium transition hover:text-orange-300"><GithubLogo size={16} />Source <ChevronRight className="inline size-3.5 transition group-hover/link:translate-x-0.5" /></a><a href={project.demo} aria-label={`View live demo of ${project.title} (placeholder)`} className="group/link text-sm font-medium transition hover:text-orange-300"><ExternalLink className="mr-1.5 inline size-4" />Live demo <ChevronRight className="inline size-3.5 transition group-hover/link:translate-x-0.5" /></a></div></article></FadeIn>)}</div></div></section>
+      <section id="projects" className="bg-stone-950 py-24 text-white sm:py-32"><div className="section-shell"><FadeIn><p className="eyebrow text-orange-400">Selected work</p><div className="mt-3 flex flex-col justify-between gap-5 md:flex-row md:items-end"><h2 className="max-w-xl font-display text-4xl leading-[1.05] tracking-[-0.04em] sm:text-5xl">Built around solid engineering, not just good-looking screens.</h2><a href={LINKS.github} target="_blank" rel="noreferrer" className="group shrink-0 font-mono text-xs uppercase tracking-[0.13em] text-stone-400 transition hover:text-white">More on GitHub <ArrowRight className="ml-1 inline size-3.5 transition group-hover:translate-x-1" /></a></div></FadeIn><div className="mt-14 grid gap-5 lg:grid-cols-2">{projects.map((project, index) => <FadeIn key={project.title} delay={index * 0.1}><article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.035] p-6 transition duration-300 hover:-translate-y-1 hover:border-white/25 sm:p-8"><div className={`absolute right-0 top-0 h-1 w-28 ${project.accent}`} /><div className="flex items-center justify-between font-mono text-xs text-stone-500"><span>{project.number}</span><span>{project.kind}</span></div><h3 className="mt-10 max-w-md font-display text-3xl leading-[1.08] tracking-[-0.035em]">{project.title}</h3><p className="mt-4 max-w-lg text-sm leading-6 text-stone-400">{project.description}</p><ul className="mt-7 space-y-3">{project.points.map((point) => <li key={point} className="flex gap-3 text-sm leading-5 text-stone-300"><Check className="mt-0.5 size-4 shrink-0 text-orange-400" />{point}</li>)}</ul><div className="mt-7 flex flex-wrap gap-2">{project.stack.map((tech) => <span key={tech} className="rounded-md border border-white/10 px-2 py-1 font-mono text-[10px] text-stone-400">{tech}</span>)}</div><div className="mt-8 flex gap-5 border-t border-white/10 pt-5"><a href={LINKS.github} target="_blank" rel="noreferrer" className="group/link inline-flex items-center gap-1.5 text-sm font-medium transition hover:text-orange-300"><GithubLogo size={16} />Source <ChevronRight size={14} className="transition group-hover/link:translate-x-0.5" /></a><a href={project.demo} aria-label={`View live demo of ${project.title} (placeholder)`} className="group/link text-sm font-medium transition hover:text-orange-300"><ExternalLink className="mr-1.5 inline size-4" />Live demo <ChevronRight className="inline size-3.5 transition group-hover/link:translate-x-0.5" /></a></div></article></FadeIn>)}</div></div></section>
 
       <section id="journey" className="section-shell py-24 sm:py-32"><FadeIn><SectionTitle label="Journey" title="Learning in public, building with intention." copy="A concise snapshot of the experiences and credentials shaping how I approach software engineering." /></FadeIn><div className="relative mt-14 max-w-3xl before:absolute before:bottom-5 before:left-[19px] before:top-5 before:w-px before:bg-stone-200 dark:before:bg-white/15">{timeline.map(({ type, icon: Icon, title, org, period, detail }, index) => <FadeIn key={title} delay={index * 0.08} className="relative grid grid-cols-[40px_1fr] gap-5 pb-10 last:pb-0"><span className="z-10 flex size-10 items-center justify-center rounded-full border border-stone-200 bg-[#f7f7f5] text-orange-600 dark:border-white/15 dark:bg-[#141414]"><Icon size={18} /></span><article className="surface rounded-xl p-5 sm:p-6"><div className="flex flex-col justify-between gap-3 sm:flex-row"><div><p className="font-mono text-[10px] uppercase tracking-[0.14em] text-orange-600 dark:text-orange-400">{type}</p><h3 className="mt-2 text-lg font-semibold tracking-tight">{title}</h3><p className="mt-1 text-sm text-stone-600 dark:text-stone-400">{org}</p></div><span className="shrink-0 font-mono text-[11px] text-stone-500">{period}</span></div><p className="mt-4 text-sm leading-6 text-stone-600 dark:text-stone-400">{detail}</p></article></FadeIn>)}</div></section>
 
